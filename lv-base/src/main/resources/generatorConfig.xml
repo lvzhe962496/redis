@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<classPathEntry
+		location="D:\maven\repo\mysql\mysql-connector-java\5.1.38\mysql-connector-java-5.1.38.jar" />
+						
+	<context id="myBatis" targetRuntime="MyBatis3">
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://10.2.16.10/1507j_shop" userId="root"
+			password="root">
+		</jdbcConnection>
+		<javaModelGenerator targetPackage="com.bawei.ssm.user.model"
+			targetProject="E:\workspace\lv-parent\lv-base\src\main\java">
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="com.bawei.ssm.user.mapper"
+			targetProject="E:\workspace\lv-parent\lv-base\src\main\java">
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.bawei.ssm.user.mapper" targetProject="E:\workspace\lv-parent\lv-base\src\main\java">
+		</javaClientGenerator>
+
+		<table tableName="user" domainObjectName="User"
+			enableCountByExample="true" enableDeleteByPrimaryKey="true"
+			enableDeleteByExample="true" enableInsert="true"
+			enableSelectByExample="true" enableSelectByPrimaryKey="true"
+			enableUpdateByExample="true" enableUpdateByPrimaryKey="true"
+			selectByExampleQueryId="true" selectByPrimaryKeyQueryId="true">
+		</table>
+	</context>
+</generatorConfiguration>
