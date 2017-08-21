@@ -12,6 +12,8 @@ import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import com.bawei.ssm.common.Page;
+import com.bawei.ssm.common.PageHandle;
 import com.bawei.ssm.common.RedisKeys;
 import com.bawei.ssm.user.mapper.UserMapper;
 import com.bawei.ssm.user.model.User;
@@ -85,13 +87,17 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public List<User> getUser() {
+
+		final Page page = PageHandle.getPage();
+
 		final		List<User> userList = new ArrayList<User>();
 		redisTemplate.execute(new RedisCallback<User>() {
 			@Override
 			public User doInRedis(RedisConnection connection) throws DataAccessException {
 				Set<byte[ ]> bytes=connection.zRange(redisTemplate.getStringSerializer()
-						.serialize(String.format(RedisKeys.MODEL_ALL, User.class.getName())), 0, -1);
-				
+						.serialize(String.format(RedisKeys.MODEL_ALL, User.class.getName()))
+						, page.getStart(), page.getStart() + page.getPageSize() - 1);
+
 				for(byte[] b:bytes){
 					userList.add((User) redisTemplate.getValueSerializer().deserialize(connection.get(b)));
 				}
