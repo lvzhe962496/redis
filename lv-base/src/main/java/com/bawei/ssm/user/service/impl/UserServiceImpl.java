@@ -89,22 +89,21 @@ public class UserServiceImpl implements UserService {
 	public List<User> getUser() {
 
 		final Page page = PageHandle.getPage();
-
-		final		List<User> userList = new ArrayList<User>();
+		final List<User> userList = new ArrayList<User>();
 		redisTemplate.execute(new RedisCallback<User>() {
 			@Override
 			public User doInRedis(RedisConnection connection) throws DataAccessException {
-				Set<byte[ ]> bytes=connection.zRange(redisTemplate.getStringSerializer()
-						.serialize(String.format(RedisKeys.MODEL_ALL, User.class.getName()))
-						, page.getStart(), page.getStart() + page.getPageSize() - 1);
-
-				for(byte[] b:bytes){
+				byte[] keys = redisTemplate.getStringSerializer()
+						.serialize(String.format(RedisKeys.MODEL_ALL, User.class.getName()));
+				page.setPageCount(connection.zCard(keys));
+				Set<byte[]> bytes = connection.zRange(keys, page.getStart(), page.getStart() + page.getPageSize() - 1);
+				for (byte[] b : bytes) {
 					userList.add((User) redisTemplate.getValueSerializer().deserialize(connection.get(b)));
 				}
 				return null;
 			}
 		});
-		if(BlankUtil.isNotBlank(userList))
+		if (BlankUtil.isNotBlank(userList))
 			return userList;
 		return userMapper.selectByExample(new UserExample());
 	}
@@ -141,6 +140,8 @@ public class UserServiceImpl implements UserService {
 			@Override
 			public User doInRedis(RedisConnection connection) throws DataAccessException {
 				connection.del(key);
+				connection.sRem(redisTemplate.getStringSerializer()
+						.serialize(String.format(RedisKeys.MODEL_KEY, User.class.getName())), key);
 				return null;
 			}
 		});
