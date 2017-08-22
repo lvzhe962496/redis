@@ -3,6 +3,9 @@ package com.bawei.ssm.util;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.bawei.ssm.common.Page;
+import com.bawei.ssm.common.PageHandle;
+
 import net.sf.json.JSONObject;
 
 public abstract class JsonUtil {
@@ -23,6 +26,12 @@ public abstract class JsonUtil {
 		Map<String, Object> map = new HashMap<String, Object>(4);
 		map.put("code", SUCCESS_CODE);
 		map.put("data", obj);
+		Page page = PageHandle.getAndRemPage();
+		if (page.isPage()) {
+			map.put("pageSize", page.getPageSize());
+			map.put("pageNum", page.getPageNum());
+			map.put("pages", page.getPages());
+		}
 		return JSONObject.fromObject(map).toString();
 	}
 
@@ -32,5 +41,4 @@ public abstract class JsonUtil {
 		map.put("msg", msg);
 		return JSONObject.fromObject(map).toString();
 	}
-
 }

@@ -8,8 +8,24 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bawei.ssm.util.BlankUtil;
 
-public class SimpleHandleInterceptor implements HandlerInterceptor{
+/**
+ * @author lvzhe
+ * @version 1.0
+ * @date 2017年8月17日
+ * @time 下午2:43:20
+ */
+public class SimpleHandleInterceptor implements HandlerInterceptor {
 
+	/**
+	 * @author lvzhe
+	 * @date 2017年8月17日
+	 * @time 下午2:44:42
+	 * @param request
+	 * @param response
+	 * @param handler
+	 * @return
+	 * @throws Exception
+	 */
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -23,20 +39,19 @@ public class SimpleHandleInterceptor implements HandlerInterceptor{
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
-		// TODO Auto-generated method stub
-		
+
 	}
+
 	/**
 	 * isDesc=1 表示true；isDesc=0表示false
 	 * 
-	 * @author 威廉
+	 * @author lvzhe
 	 * @date 2017年8月19日
 	 * @time 上午9:18:25
 	 * @param request

@@ -11,8 +11,15 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bawei.ssm.util.JsonUtil;
+
+/**
+ * @author lvzhe
+ * @version 1.0
+ * @date 2017年8月17日
+ * @time 下午2:53:16
+ */
 @Component
-public class SimpleHandlerExceptionResolver implements HandlerExceptionResolver{
+public class SimpleHandlerExceptionResolver implements HandlerExceptionResolver {
 
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
