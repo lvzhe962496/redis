@@ -31,6 +31,7 @@ public abstract class JsonUtil {
 			map.put("pageSize", page.getPageSize());
 			map.put("pageNum", page.getPageNum());
 			map.put("pages", page.getPages());
+			
 		}
 		return JSONObject.fromObject(map).toString();
 	}

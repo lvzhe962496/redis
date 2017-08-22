@@ -51,7 +51,7 @@ public class Page {
 
 	public void setPageCount(long pageCount) {
 		this.pageCount = pageCount;
-		this.pages = (int) (pageCount / pageSize + (pageCount % pageSize > 0 ? 1 : 0));
+		this.pages = (pageSize!=0)?(int) (pageCount / pageSize + (pageCount % pageSize > 0 ? 1 : 0)):1;
 	}
 
 	public int getStart() {
