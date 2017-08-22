@@ -89,6 +89,7 @@ public class UserServiceImpl implements UserService {
 	public List<User> getUser() {
 
 		final Page page = PageHandle.getPage();
+
 		final List<User> userList = new ArrayList<User>();
 		redisTemplate.execute(new RedisCallback<User>() {
 			@Override
@@ -147,7 +148,6 @@ public class UserServiceImpl implements UserService {
 		});
 		userMapper.deleteByPrimaryKey(id);
 	}
-
 	/**
 	 * 
 	 * @author 威廉
